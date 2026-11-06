@@ -24,8 +24,8 @@ def notas (nota1=0,nota2=0,nota3=0):
 @app.route ("/edad")
 @app.route ("/edad/<int:edad>")
 def edades(edad=0):
-    if edad>18:
-        R="Adulto"
+    if edad<18:
+        R="Menor de edad"
     elif(edad<60):
         R="Adulto"
     else:
