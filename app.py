@@ -55,6 +55,53 @@ def arreglos(valores=0, columnas=0, filas=0):
             
     return f"<h1> El arreglo aleatorio es:{arreglo}</h1> <hr>"
 
+#Ejercicios propuestos
+# Programa para calcular la ecuación:
+# Y = X * Z + Z + X
+
+@app.route("/calcular")
+@app.route("/calcular/<int:x>/<int:z>")
+def calcular(x=0, z=0):
+    Y = x * z + z + x
+
+    return f"<h1>El resultado de Y es: {Y}</h1><hr>"
+
+
+ #ejercicio propuesto 2
+@app.route("/tabla")
+@app.route("/tabla/<int:numero>")
+def tabla(numero=0):
+    resultado = "<h1>Tabla de multiplicar</h1><hr>"
+
+    for i in range(1, 11):
+        resultado += f"{numero} x {i} = {numero * i}<br>"
+
+    return resultado
+
+#Realizar el programa que calcule las áreas de un círculo, cuadrado y triangulo.
+
+@app.route("/areas")
+@app.route("/areas/<string:figura>/<float:valor1>/<float:valor2>")
+def areas(figura="circulo", valor1=0, valor2=0):
+
+    if figura == "circulo":
+        area = 3.1416 * (valor1 ** 2)
+        resultado = f"El área del círculo es: {area}"
+
+    elif figura == "cuadrado":
+        area = valor1 * valor1
+        resultado = f"El área del cuadrado es: {area}"
+
+    elif figura == "triangulo":
+        area = (valor1 * valor2) / 2
+        resultado = f"El área del triángulo es: {area}"
+
+    else:
+        resultado = "Figura no válida"
+
+    return f"<h1>{resultado}</h1><hr>"
+
+
 if __name__=='__main__':
     #El valor True indica que la app se deja en modo debug
     app.run(debug=True)
