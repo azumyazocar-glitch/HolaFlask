@@ -1,6 +1,12 @@
 #importamos flask 
-from flask import Flask 
+from flask import Flask, render_template 
+from flask_cors import CORS
 app=Flask (__name__)
+CORS(app)
+
+@app.route("/")
+def inicio():
+    return render_template("index.html")
 
 #Definimos la ruta principal
 @app.route ("/")
@@ -31,6 +37,23 @@ def edades(edad=0):
     else:
         R="Adulto mayor"
     return f"<h1> La persona es:{R}</h1> <hr>"
+
+
+
+#Creamos otra ruta realizamos el siguiente ejercicio
+#3.) Realizar un algoritmo con funciones que en la primera opción cargue e imprima vectores, en la segunda opción cargue e imprima matrices
+#Importamos la libreria numpy si no existe la instalamos con:pip install numpy
+import numpy as np 
+@app.route ("/arreglos")
+@app.route ("/arreglos/<int:valores>/<int:columnas>/<int:filas>")
+def arreglos(valores=0, columnas=0, filas=0):
+    if filas==0:
+        arreglo=np.random.randint(valores, size=columnas)
+    
+    else:
+        arreglo=np.random.randint(valores, size=(filas, columnas))
+            
+    return f"<h1> El arreglo aleatorio es:{arreglo}</h1> <hr>"
 
 if __name__=='__main__':
     #El valor True indica que la app se deja en modo debug
